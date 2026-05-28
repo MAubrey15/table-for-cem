@@ -21,9 +21,8 @@ $(document).ready(function() {
 		});
 	}
 
-	// Event listener for form submission
-	$('#filterForm').submit(function(e) {
-		e.preventDefault();
+	// Apply filters on dropdown change
+	$('#filterCategory, #filterLocation').on('change', function() {
 		applyFilters();
 	});
 
