@@ -8,11 +8,16 @@ $(document).ready(function() {
 
 		// Filter based on category and location filters
 		$('.operation-card').each(function() {
-			const category = $(this).data('category').toLowerCase();
-			const location = $(this).data('location').toLowerCase();
+			const categoryData = $(this).data('category').toLowerCase();
+			const locationData = $(this).data('location').toLowerCase();
 
-			const categoryMatch = categoryFilter === '' || category.includes(categoryFilter);
-			const locationMatch = locationFilter === '' || location.includes(locationFilter);
+			// Split by comma to handle multiple values in data attributes
+			const categories = categoryData.split(',').map(cat => cat.trim());
+			const locations = locationData.split(',').map(loc => loc.trim());
+
+			// Check if filter matches any of the values
+			const categoryMatch = categoryFilter === '' || categories.some(cat => cat === categoryFilter);
+			const locationMatch = locationFilter === '' || locations.some(loc => loc === locationFilter);
 
 			// Check if the card matches the filters
 			if (!(categoryMatch && locationMatch)) {
