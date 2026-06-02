@@ -21,3 +21,83 @@
 	max-width: none;
 	margin-bottom: 0;
 }
+
+/* Card Layout Styles */
+.cards-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	width: 100%;
+}
+
+.operation-card {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s ease;
+	overflow: hidden;
+}
+
+.operation-card:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+	background-color: #f5f5f5;
+	padding: 15px;
+	border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+	margin: 0;
+	font-size: 1.25rem;
+	color: #003d82;
+}
+
+.card-title a {
+	color: #003d82;
+	text-decoration: none;
+}
+
+.card-title a:hover {
+	text-decoration: underline;
+}
+
+.card-content {
+	padding: 15px;
+}
+
+.card-field {
+	margin-bottom: 12px;
+}
+
+.card-field:last-child {
+	margin-bottom: 0;
+}
+
+.card-field strong {
+	display: block;
+	margin-bottom: 5px;
+	color: #333;
+	font-weight: 600;
+}
+
+.card-field p {
+	margin: 0;
+	color: #666;
+	line-height: 1.6;
+}
+
+/* Responsive grid for larger screens */
+@media (min-width: 768px) {
+	.cards-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1200px) {
+	.cards-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
