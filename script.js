@@ -1,58 +1,82 @@
 $(document).ready(function() {
-	function applyFilters() {
-		const languageFilter = $('#filterLanguage').val().trim().toLowerCase();
-		const specialFilter = $('#filterSpecial').val().trim().toLowerCase();
-		const searchTerm = $('#searchOperations').val().trim().toLowerCase();
 
-		// Show all cards initially to reset visibility
-		$('.operation-card').show();
+    const gradeOrder = ["JK", "SK", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
-		// Filter based on language, special, and search term
-		$('.operation-card').each(function() {
-			const languageData = $(this).data('language') ? $(this).data('language').toLowerCase() : '';
-			const specialData = $(this).data('special') ? $(this).data('special').toLowerCase() : '';
-			
-			// Get all text content from the card for full-text search
-			const cardText = $(this).text().toLowerCase();
+    function gradeInRange(selectedGrade, rangeText) {
+        if (!rangeText) return false;
 
-			// Split by comma to handle multiple values in data attributes
-			const languages = languageData.split(',').map(lang => lang.trim());
-			const specials = specialData.split(',').map(spec => spec.trim());
+        // Clean text like "JK-Grade 12" → "JK-12"
+        rangeText = rangeText.replace(/Grade/g, "").replace(/\s/g, "");
 
-			// Check if language filter matches
-			const languageMatch = languageFilter === '' || languages.some(lang => lang === languageFilter);
-			
-			// Check if special filter matches
-			const specialMatch = specialFilter === '' || specials.some(spec => spec === specialFilter);
-			
-			// Check if search term matches any text in the card
-			const searchMatch = searchTerm === '' || cardText.includes(searchTerm);
+        let parts = rangeText.split("-");
+        let start = parts[0];
+        let end = parts[1] || parts[0];
 
-			// Check if the card matches all filters
-			if (!(languageMatch && specialMatch && searchMatch)) {
-				$(this).hide();
-			}
-		});
-	}
+        const selectedIndex = gradeOrder.indexOf(selectedGrade);
+        const startIndex = gradeOrder.indexOf(start);
+        const endIndex = gradeOrder.indexOf(end);
 
-	// Apply filters on dropdown change
-	$('#filterLanguage, #filterSpecial').on('change', function() {
-		applyFilters();
-	});
+        if (selectedIndex === -1 || startIndex === -1 || endIndex === -1) {
+            return false;
+        }
 
-	// Apply filters on search input
-	$('#searchOperations').on('keyup', function() {
-		applyFilters();
-	});
+        return selectedIndex >= startIndex && selectedIndex <= endIndex;
+    }
 
-	// Reset filters button
-	$('#resetFilters').click(function() {
-		$('#filterLanguage').val('');
-		$('#filterSpecial').val('');
-		$('#searchOperations').val('');
-		applyFilters();
-	});
+    function applyFilters() {
+        const languageFilter = $('#filterLanguage').val().trim().toLowerCase();
+        const specialFilter = $('#filterSpecial').val().trim().toLowerCase();
+        const searchTerm = $('#searchOperations').val().trim().toLowerCase();
+        const gradeFilter = $('#filterGrade').val(); //
 
-	// Initial application of filters on page load
-	applyFilters();
+        // Show all cards initially
+        $('.operation-card').show();
+
+        $('.operation-card').each(function() {
+            const languageData = $(this).data('language') ? $(this).data('language').toLowerCase() : '';
+            const specialData = $(this).data('special') ? $(this).data('special').toLowerCase() : '';
+            const gradeData = $(this).data('grades'); // 
+            
+            const cardText = $(this).text().toLowerCase();
+
+            const languages = languageData.split(',').map(lang => lang.trim());
+            const specials = specialData.split(',').map(spec => spec.trim());
+
+            const languageMatch = languageFilter === '' || languages.some(lang => lang === languageFilter);
+            const specialMatch = specialFilter === '' || specials.some(spec => spec === specialFilter);
+            const searchMatch = searchTerm === '' || cardText.includes(searchTerm);
+
+            // 
+            let gradeMatch = true;
+            if (gradeFilter !== '') {
+                gradeMatch = gradeInRange(gradeFilter, gradeData);
+            }
+
+            if (!(languageMatch && specialMatch && searchMatch && gradeMatch)) {
+                $(this).hide();
+            }
+        });
+    }
+
+    // Apply filters on dropdown change
+    $('#filterLanguage, #filterSpecial, #filterGrade').on('change', function() {
+        applyFilters();
+    });
+
+    // Apply filters on search input
+    $('#searchOperations').on('keyup', function() {
+        applyFilters();
+    });
+
+    // Reset filters button
+    $('#resetFilters').click(function() {
+        $('#filterLanguage').val('');
+        $('#filterSpecial').val('');
+        $('#filterGrade').val(''); //
+        $('#searchOperations').val('');
+        applyFilters();
+    });
+
+    // Initial load
+    applyFilters();
 });
