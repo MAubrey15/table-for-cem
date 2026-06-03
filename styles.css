@@ -25,6 +25,7 @@
 /* Search Bar Styles */
 
 
+
 .search-bar-wrapper .form-group {
     display: flex;
     align-items: center;
@@ -36,13 +37,12 @@
     white-space: nowrap;
 }
 
-.search-bar-wrapper input {
-    width: 100%;
+.search-bar-wrapper .form-control {
+    flex: 1;
+    width: auto;
+    max-width: none;
 }
 
-.search-bar-wrapper .form-group input {
-    flex: 1;
-}
 
 
 
