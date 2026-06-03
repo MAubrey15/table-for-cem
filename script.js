@@ -1,40 +1,40 @@
 $(document).ready(function() {
 	function applyFilters() {
-		const categoryFilter = $('#filterCategory').val().trim().toLowerCase();
-		const locationFilter = $('#filterLocation').val().trim().toLowerCase();
+		const specialFilter = $('#filterspecial').val().trim().toLowerCase();
+		const languageFilter = $('#filterlanguage').val().trim().toLowerCase();
 
 		// Show all cards initially to reset visibility
 		$('.operation-card').show();
 
-		// Filter based on category and location filters
+		// Filter based on special and language filters
 		$('.operation-card').each(function() {
-			const categoryData = $(this).data('category').toLowerCase();
-			const locationData = $(this).data('location').toLowerCase();
+			const specialData = $(this).data('special').toLowerCase();
+			const languageData = $(this).data('language').toLowerCase();
 
 			// Split by comma to handle multiple values in data attributes
-			const categories = categoryData.split(',').map(cat => cat.trim());
-			const locations = locationData.split(',').map(loc => loc.trim());
+			const categories = specialData.split(',').map(cat => cat.trim());
+			const languages = languageData.split(',').map(loc => loc.trim());
 
 			// Check if filter matches any of the values
-			const categoryMatch = categoryFilter === '' || categories.some(cat => cat === categoryFilter);
-			const locationMatch = locationFilter === '' || locations.some(loc => loc === locationFilter);
+			const specialMatch = specialFilter === '' || categories.some(cat => cat === specialFilter);
+			const languageMatch = languageFilter === '' || languages.some(loc => loc === languageFilter);
 
 			// Check if the card matches the filters
-			if (!(categoryMatch && locationMatch)) {
+			if (!(specialMatch && languageMatch)) {
 				$(this).hide();
 			}
 		});
 	}
 
 	// Apply filters on dropdown change
-	$('#filterCategory, #filterLocation').on('change', function() {
+	$('#filterspecial, #filterlanguage').on('change', function() {
 		applyFilters();
 	});
 
 	// Reset filters button
 	$('#resetFilters').click(function() {
-		$('#filterCategory').val('');
-		$('#filterLocation').val('');
+		$('#filterspecial').val('');
+		$('#filterlanguage').val('');
 		applyFilters();
 	});
 
