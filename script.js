@@ -1,40 +1,55 @@
 $(document).ready(function() {
 	function applyFilters() {
-		const specialFilter = $('#filterspecial').val().trim().toLowerCase();
-		const languageFilter = $('#filterlanguage').val().trim().toLowerCase();
+		const languageFilter = $('#filterLanguage').val().trim().toLowerCase();
+		const specialFilter = $('#filterSpecial').val().trim().toLowerCase();
+		const searchTerm = $('#searchOperations').val().trim().toLowerCase();
 
 		// Show all cards initially to reset visibility
 		$('.operation-card').show();
 
-		// Filter based on special and language filters
+		// Filter based on language, special, and search term
 		$('.operation-card').each(function() {
-			const specialData = $(this).data('special').toLowerCase();
-			const languageData = $(this).data('language').toLowerCase();
+			const languageData = $(this).data('language') ? $(this).data('language').toLowerCase() : '';
+			const specialData = $(this).data('special') ? $(this).data('special').toLowerCase() : '';
+			
+			// Get all text content from the card for full-text search
+			const cardText = $(this).text().toLowerCase();
 
 			// Split by comma to handle multiple values in data attributes
-			const categories = specialData.split(',').map(cat => cat.trim());
-			const languages = languageData.split(',').map(loc => loc.trim());
+			const languages = languageData.split(',').map(lang => lang.trim());
+			const specials = specialData.split(',').map(spec => spec.trim());
 
-			// Check if filter matches any of the values
-			const specialMatch = specialFilter === '' || categories.some(cat => cat === specialFilter);
-			const languageMatch = languageFilter === '' || languages.some(loc => loc === languageFilter);
+			// Check if language filter matches
+			const languageMatch = languageFilter === '' || languages.some(lang => lang === languageFilter);
+			
+			// Check if special filter matches
+			const specialMatch = specialFilter === '' || specials.some(spec => spec === specialFilter);
+			
+			// Check if search term matches any text in the card
+			const searchMatch = searchTerm === '' || cardText.includes(searchTerm);
 
-			// Check if the card matches the filters
-			if (!(specialMatch && languageMatch)) {
+			// Check if the card matches all filters
+			if (!(languageMatch && specialMatch && searchMatch)) {
 				$(this).hide();
 			}
 		});
 	}
 
 	// Apply filters on dropdown change
-	$('#filterspecial, #filterlanguage').on('change', function() {
+	$('#filterLanguage, #filterSpecial').on('change', function() {
+		applyFilters();
+	});
+
+	// Apply filters on search input
+	$('#searchOperations').on('keyup', function() {
 		applyFilters();
 	});
 
 	// Reset filters button
 	$('#resetFilters').click(function() {
-		$('#filterspecial').val('');
-		$('#filterlanguage').val('');
+		$('#filterLanguage').val('');
+		$('#filterSpecial').val('');
+		$('#searchOperations').val('');
 		applyFilters();
 	});
 

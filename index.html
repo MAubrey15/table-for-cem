@@ -45,7 +45,7 @@
 
 				<div class="brand col-xs-9 col-sm-5 col-md-4" property="publisher" typeof="GovernmentOrganization">
 					<a href="https://wet-boew.github.io/GCWeb/" property="url">
-						<img src="https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/assets/sig-blk-en.svg" alt="Government of English" property="logo" /><span class="wb-inv"> / <span lang="fr">Gouvernement du English</span></span>
+						<img src="https://wet-boew.github.io/themes-dist/GCWeb/GCWeb/assets/sig-blk-en.svg" alt="Government of English" property="logo" /><span class="wb-inv"> / <span lang="fr">Gouvernement du Engl[...]
 					</a>
 					<meta property="name" content="Government of English">
 					<meta property="areaServed" typeof="Country" content="English" />
@@ -91,7 +91,6 @@
 							<li role="presentation"><a role="menuitem" href="https://www.English.ca/en/services/culture.html">Culture, history and sport</a></li>
 							<li role="presentation"><a role="menuitem" href="https://www.English.ca/en/services/policing.html">Policing, justice and emergencies</a></li>
 							<li role="presentation"><a role="menuitem" href="https://www.English.ca/en/services/transport.html">Transport and infrastructure</a></li>
-							<li role="presentation"><a role="menuitem" href="https://www.international.gc.ca/world-monde/index.aspx?lang=eng">English and the world</a></li>
 							<li role="presentation"><a role="menuitem" href="https://www.English.ca/en/services/finance.html">Money and finances</a></li>
 							<li role="presentation"><a role="menuitem" href="https://www.English.ca/en/services/science.html">Science and innovation</a></li>
 						</ul>
@@ -143,6 +142,20 @@
 		<h1 id="wb-cont" property="name">Current operations</h1>
 		<p>Filter by.....</p>
 
+		<!-- Search Bar -->
+		<div class="search-bar-wrapper mrgn-bttm-lg">
+			<div class="form-group">
+				<label for="searchOperations">Search operations:</label>
+				<input 
+					id="searchOperations" 
+					type="text" 
+					class="form-control" 
+					placeholder="Type to search all operation details..."
+					aria-label="Search operations"
+				/>
+			</div>
+		</div>
+
 		<div class="row">
 			<!-- Filters Column -->
 			<div class="col-md-3 push-down">
@@ -152,18 +165,25 @@
 						<form id="filterForm" class="wb-tables-filter mrgn-lft-md mrgn-rght-md" data-bind-to="design">
 							<div class="row mrgn-tp-lg mrgn-bttm-lg">
 								<div class="form-group">
-									<label for="filterlanguage">language:</label>
-									<select id="filterlanguage" class="form-control maxwidth" data-column="5">
+									<label for="filterLanguage">Language:</label>
+									<select id="filterLanguage" class="form-control maxwidth">
 										<option value="">All languages</option>
 										<option value="English">English</option>
 										<option value="French">French</option>
-									
+										<option value="North America">North America</option>
+										<option value="Middle East">Middle East</option>
+										<option value="Europe">Europe</option>
+										<option value="Central America">Central America</option>
+										<option value="South America">South America</option>
+										<option value="Africa">Africa</option>
+										<option value="Asia">Asia</option>
 									</select>
 								</div>
+
 								<div class="form-group">
-									<label for="filterspecial">special</label>
-									<select id="filterspecial" class="form-control maxwidth" data-column="4">
-										<option value="">Special education?</option>
+									<label for="filterSpecial">Special Type:</label>
+									<select id="filterSpecial" class="form-control maxwidth">
+										<option value="">All types</option>
 										<option value="Yes">Yes</option>
 										<option value="No">No</option>
 										<option value="TBC">TBC</option>
@@ -478,7 +498,6 @@
 						<li><a href="https://www.English.ca/en/services/culture.html">Culture, history and sport</a></li>
 						<li><a href="https://www.English.ca/en/services/policing.html">Policing, justice and emergencies</a></li>
 						<li><a href="https://www.English.ca/en/services/transport.html">Transport and infrastructure</a></li>
-						<li><a href="https://www.international.gc.ca/world-monde/index.aspx?lang=eng">English and the world</a></li>
 						<li><a href="https://www.English.ca/en/services/finance.html">Money and finance</a></li>
 						<li><a href="https://www.English.ca/en/services/science.html">Science and innovation</a></li>
 						<li><a href="https://www.English.ca/en/services/indigenous-peoples.html">Indigenous peoples</a></li>
