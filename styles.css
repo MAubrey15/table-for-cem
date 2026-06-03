@@ -1,5 +1,5 @@
 .push-down {
-	margin-top: 40px;
+	margin-top: 0;
 }
 
 .dataTables_length,
@@ -23,29 +23,30 @@
 }
 
 /* Search Bar Styles */
+
 .search-bar-wrapper {
-	background-color: #f9f9f9;
-	padding: 15px;
-	border: 1px solid #e0e0e0;
-	border-radius: 4px;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-bottom: 20px;
 }
 
+
 .search-bar-wrapper .form-group {
-	margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .search-bar-wrapper label {
-	font-weight: 600;
-	margin-bottom: 8px;
-	display: block;
-	color: #333;
+    margin: 0;
+    white-space: nowrap;
 }
 
-.search-bar-wrapper #searchOperations {
-	padding: 10px 12px;
-	font-size: 1rem;
-	border-radius: 4px;
+.search-bar-wrapper input {
+    max-width: 350px;
 }
+
 
 /* Card Layout Styles */
 .cards-container {
@@ -93,12 +94,6 @@
 	padding: 15px;
 }
 
-.card-field {
-    display: grid;
-    grid-template-columns: 220px 1fr; /* labels | values */
-    gap: 6px 16px;
-    margin-bottom: 12px;
-}
 
 
 .card-field {
