@@ -29,6 +29,7 @@ $(document).ready(function() {
 	function applyFilters() {
 		const languageFilter = $('#filterLanguage').val().trim().toLowerCase();
 		const specialFilter = $('#filterSpecial').val().trim().toLowerCase();
+		const repFilter = $('#filterRep').val().trim().toLowerCase();
 		const searchTerm = $('#searchOperations').val().trim().toLowerCase();
 		const gradeFilter = $('#filterGrade').val();
 
@@ -39,26 +40,29 @@ $(document).ready(function() {
 		$('.operation-card').each(function() {
 			const languageData = $(this).data('language') ? $(this).data('language').toLowerCase() : '';
 			const specialData = $(this).data('special') ? $(this).data('special').toLowerCase() : '';
+			const repData = $(this).data('rep') ? $(this).data('rep').toLowerCase() : '';
 			const gradeData = $(this).data('grades');
 			
 			const cardText = $(this).text().toLowerCase();
 
 			const languages = languageData.split(',').map(lang => lang.trim());
 			const specials = specialData.split(',').map(spec => spec.trim());
+			const reps = repData ? repData.split(',').map(r => r.trim()) : [];
+			const repMatch = repFilter === '' || reps.some(r => r === repFilter);
 
 			const languageMatch = languageFilter === '' || languages.some(lang => lang === languageFilter);
 			const specialMatch = specialFilter === '' || specials.some(spec => spec === specialFilter);
 			const searchMatch = searchTerm === '' || cardText.includes(searchTerm);
 			const gradeMatch = gradeInRange(gradeFilter, gradeData);
 
-			if (!(languageMatch && specialMatch && searchMatch && gradeMatch)) {
+			if (!(languageMatch && specialMatch && repMatch && searchMatch && gradeMatch)) {
 				$(this).hide();
 			}
 		});
 	}
 
 	// Apply filters on dropdown change
-	$('#filterLanguage, #filterSpecial, #filterGrade').on('change', function() {
+	$('#filterLanguage, #filterSpecial, #filterGrade, #filterRep').on('change', function() {
 		applyFilters();
 	});
 
@@ -72,6 +76,7 @@ $(document).ready(function() {
 		$('#filterLanguage').val('');
 		$('#filterSpecial').val('');
 		$('#filterGrade').val('');
+		$('#filterRep').val('');
 		$('#searchOperations').val('');
 		applyFilters();
 	});
