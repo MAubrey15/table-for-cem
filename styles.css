@@ -134,7 +134,7 @@
     line-height: 1.6;
 }
 
-card-note {
+.card-note {
     padding: 12px 15px;
     border-top: 1px solid #ddd;
     font-size: 0.9em;
