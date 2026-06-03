@@ -134,6 +134,14 @@
     line-height: 1.6;
 }
 
+card-note {
+    padding: 12px 15px;
+    border-top: 1px solid #ddd;
+    font-size: 0.9em;
+    color: #555;
+    background-color: #f9f9f9;
+}
+
 
 /* Hide card when filtered */
 .operation-card.hidden {
